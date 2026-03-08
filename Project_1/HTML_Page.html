@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML - Explained</title>
+  <style>
+    /* Reset & Smooth Scroll */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      color: #eaeaea;
+      line-height: 1.6;
+      padding-top: 70px;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    header h1 {
+      font-size: 1.8rem;
+      color: #ffcc00;
+      text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff0099;
+    }
+    nav a {
+      margin: 0 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffcc00;
+      transform: scale(1.1);
+    }
+
+    /* Sections */
+    main, section {
+      padding: 2rem 5%;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #00e6ff;
+      border-left: 5px solid #ffcc00;
+      padding-left: 10px;
+    }
+    h3 {
+      margin: 1rem 0 0.5rem;
+      color: #ffcc00;
+    }
+    p, li {
+      font-size: 1.1rem;
+    }
+
+    /* Code Styling */
+    pre {
+      background: #111;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      color: #00ff99;
+      box-shadow: 0 0 15px rgba(0,255,153,0.4);
+    }
+    code {
+      font-family: "Courier New", monospace;
+    }
+
+    /* Details (collapsible) */
+    details {
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-left: 3px solid #00e6ff;
+      background: rgba(255,255,255,0.05);
+      border-radius: 5px;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: bold;
+      color: #ffcc00;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin: 1rem 0 1rem 1.5rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Aside */
+    aside {
+      background: rgba(255,255,255,0.05);
+      padding: 1rem;
+      margin: 2rem 0;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.3);
+    }
+    aside h3 {
+      color: #00e6ff;
+    }
+
+    /* Footer */
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    footer p {
+      color: #777;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+      nav {
+        margin-top: 10px;
+      }
+      nav a {
+        display: inline-block;
+        margin: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>HTML Guide</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section id="about">
+      <h2>About HTML</h2>
+      <p><u>HTML</u> stands for <i>HyperText Markup Language</i>.
+         It is the standard markup language for creating web pages.
+         It structures the content on the web (text, images, links, videos, forms, etc.).
+         HTML is not a programming language but a markup language that uses tags.</p>
+    </section>
+
+    <section id="services">
+      <h2>HTML Document Structure</h2>
+      <p>A basic HTML page looks like this:</p>
+      <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My First Webpage&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first HTML page.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </code></pre>
+
+      <p><strong>Breakdown:</strong></p>
+      <details><summary>&lt;!DOCTYPE html&gt;</summary>Defines document type (HTML5).</details>
+      <details><summary>&lt;html&gt;</summary>Root element.</details>
+      <details><summary>&lt;head&gt;</summary>Metadata (title, links, SEO, scripts).</details>
+      <details><summary>&lt;title&gt;</summary>Title shown in browser tab.</details>
+      <details><summary>&lt;body&gt;</summary>Visible content of the page.</details>
+
+      <h2>HTML Elements</h2>
+      <p>An HTML element has the structure:</p>
+      <pre><code>&lt;tagname&gt; Content &lt;/tagname&gt;</code></pre>
+      <p>Types of Elements:</p>
+      <ol>
+        <li>Block-level elements → Start on a new line (e.g., &lt;div&gt;, &lt;p&gt;, &lt;h1&gt;–&lt;h6&gt;, &lt;section&gt;).</li>
+        <li>Inline elements → Do not start on a new line (e.g., &lt;span&gt;, &lt;a&gt;, &lt;strong&gt;, &lt;em&gt;).</li>
+        <li>Empty elements (void) → Don’t have closing tags (e.g., &lt;br&gt;, &lt;img&gt;, &lt;hr&gt;, &lt;input&gt;).</li>
+      </ol>
+
+      <article>
+        <h3>HTML Attributes</h3>
+        <p>Attributes provide extra information about elements, written inside the opening tag:</p>
+        <pre><code>&lt;img src="image.jpg" alt="Description" width="300" height="200"&gt;</code></pre>
+        <ul>
+          <li>id → Unique identifier.</li>
+          <li>class → Used for styling (CSS/JS).</li>
+          <li>style → Inline CSS.</li>
+          <li>title → Tooltip text.</li>
+          <li>src, href, alt, target, etc.</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>HTML Head Elements</h3>
+        <p>Inside &lt;head&gt; you typically find:</p>
+        <ul>
+          <li>&lt;title&gt; → Page title.</li>
+          <li>&lt;meta&gt; → Metadata (charset, description, keywords).</li>
+          <li>&lt;link&gt; → External stylesheets.</li>
+          <li>&lt;style&gt; → Internal CSS.</li>
+          <li>&lt;script&gt; → JavaScript.</li>
+          <li>&lt;base&gt; → Base URL.</li>
+        </ul>
+      </article>
+    </section>
+
+    <aside>
+      <h3>HTML Text Formatting</h3>
+      <p>
+        &lt;h1&gt; to &lt;h6&gt; → Headings. <br>
+        &lt;p&gt; → Paragraph. <br>
+        &lt;br&gt; → Line break. <br>
+        &lt;hr&gt; → Horizontal rule. <br>
+        &lt;b&gt;, &lt;strong&gt; → Bold text. <br>
+        &lt;i&gt;, &lt;em&gt; → Italics. <br>
+        &lt;u&gt; → Underline. <br>
+        &lt;mark&gt; → Highlighted text. <br>
+        &lt;sup&gt;, &lt;sub&gt; → Superscript, subscript. <br>
+      </p>
+    </aside>
+  </main>
+
+  <section id="contact">
+    <h2>HTML5 APIs</h2>
+    <ul>
+      <li>Canvas API → Draw graphics.</li>
+      <li>SVG → Scalable vector graphics.</li>
+      <li>Geolocation API → User’s location.</li>
+      <li>Drag and Drop API.</li>
+      <li>Local Storage & Session Storage → Store data in browser.</li>
+      <li>Web Workers → Run scripts in background.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 TechSphere</p>
+  </footer>
+
+</body>
+</html>

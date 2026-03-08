@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&family=Story+Script&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #000000, #1a1a1a);
+      color: #fff;
+      font-family: 'Noto Sans Bengali', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #heading1 {
+      font-family: 'Story Script', cursive;
+      font-size: 4rem;
+      font-weight: 700;
+      color: #e7ff12;
+      text-align: center;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 10px #e7ff12, 0 0 25px #ff00ff, 0 0 40px cyan;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #e7ff12, 0 0 20px #ff00ff, 0 0 30px cyan; }
+      to { text-shadow: 0 0 20px #ff00ff, 0 0 40px cyan, 0 0 60px #e7ff12; }
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 2rem;
+      width: 90%;
+      max-width: 1000px;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .tooltip a {
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .tooltip img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 20px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      background-color: #111;
+      padding: 15px;
+      cursor: pointer;
+    }
+
+    .tooltip a:hover img {
+      transform: scale(1.2) rotate(8deg);
+      box-shadow: 0 0 20px cyan, 0 0 40px #ff00ff, 0 0 60px #e7ff12;
+      filter: brightness(1.3);
+    }
+
+    /* Tooltip text */
+    .tooltip::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -2.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.8);
+      color: #e7ff12;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .tooltip:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-5px);
+    }
+
+    @media (max-width: 600px) {
+      #heading1 {
+        font-size: 2.5rem;
+      }
+      .tooltip img {
+        width: 90px;
+        height: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="heading1">Applications</h1>
+  <div class="container">
+    <div class="tooltip" data-tooltip="HTML5"><a href="HTML_Page.html"><img src="HTML5.png" alt="HTML5"></a></div>
+    <div class="tooltip" data-tooltip="CSS3"><a href="css.html"><img src="css-3.png" alt="CSS3"></a></div>
+    <div class="tooltip" data-tooltip="JavaScript"><a href="javascript.html"><img src="JavaScript.png" alt="JavaScript"></a></div>
+    <div class="tooltip" data-tooltip="Java"><a href="java.html"><img src="java.png" alt="Java"></a></div>
+    <div class="tooltip" data-tooltip="Python"><a href="python.html"><img src="Python.png" alt="Python"></a></div>
+    <div class="tooltip" data-tooltip="C Language"><a href="c.html"><img src="C_Logo.png" alt="C"></a></div>
+    <div class="tooltip" data-tooltip="C++"><a href="cpp.html"><img src="icons8-c++-480.png" alt="C++"></a></div>
+    <div class="tooltip" data-tooltip="Figma"><a href="figma.html"><img src="figma.png" alt="Figma"></a></div>
+    
+    <!-- Extra placeholders -->
+    <div class="tooltip" data-tooltip="React"><a href="react.html"><img src="icons8-react-js-512.png" alt="React"></a></div>
+    <div class="tooltip" data-tooltip="Node.js"><a href="node.html"><img src="icons8-node-js-512.png" alt="Node.js"></a></div>
+    <div class="tooltip" data-tooltip="GitHub"><a href="github.html"><img src="icons8-github-420.png" alt="GitHub"></a></div>
+    <div class="tooltip" data-tooltip="Bootstrap"><a href="bootstrap.html"><img src="icons8-bootstrap-512.png" alt="Bootstrap"></a></div>
+  </div>
+</body>
+</html>

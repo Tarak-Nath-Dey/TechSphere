@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bootstrap Guide - Dark Theme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Pacifico&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background: #121212;
+      color: #e0e0e0;
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header, footer {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 900px;
+      box-shadow:
+        0 0 8px #6a11cb,
+        0 0 20px #2575fc;
+      user-select: none;
+      text-align: center;
+      animation: glowHeader 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowHeader {
+      from {
+        box-shadow:
+          0 0 10px #6a11cb,
+          0 0 25px #2575fc;
+      }
+      to {
+        box-shadow:
+          0 0 20px #8e2de2,
+          0 0 40px #4a90e2;
+      }
+    }
+
+    header h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      margin: 0;
+      letter-spacing: 0.1em;
+      text-shadow: 0 0 8px #ffffff99;
+    }
+
+    nav {
+      margin-top: 15px;
+    }
+
+    nav a {
+      margin: 0 12px;
+      color: #88c0d0;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+      transition: color 0.3s ease;
+      font-size: 1.1rem;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: #88c0d0;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+      border-radius: 2px;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: #a3cef1;
+      outline: none;
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    main {
+      max-width: 900px;
+      width: 100%;
+      padding: 10px 20px;
+    }
+
+    section {
+      background: #1e1e2f;
+      border-radius: 12px;
+      padding: 25px 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 0 12px #37478580;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #d0d7de;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    section:hover, section:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 0 20px #81a1c1cc, 0 8px 24px #5e81accc;
+      cursor: pointer;
+      outline: none;
+    }
+
+    section h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5rem;
+      color: #81a1c1;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 8px #81a1c1cc;
+      letter-spacing: 0.05em;
+    }
+
+    section h3 {
+      font-weight: 700;
+      color: #88c0d0;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    ul {
+      margin-left: 1.5rem;
+      list-style-type: disc;
+    }
+
+    ul li {
+      margin-bottom: 0.6rem;
+      font-size: 1.05rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+      color: #d0d7de;
+    }
+
+    code, pre {
+      background: #2e3440;
+      color: #8fbcbb;
+      font-family: 'Fira Mono', Consolas, monospace;
+      border-radius: 10px;
+      padding: 15px 20px;
+      overflow-x: auto;
+      font-size: 1rem;
+      line-height: 1.4;
+      /* box-shadow: inset 0 0 15px #5e81acaa; */
+      user-select: text;
+      white-space: pre-wrap;
+      transition: background-color 0.3s ease;
+      padding: 2px 6px;
+      font-size: 0.95rem;
+    }
+
+    pre {
+      background: #2e3440;
+      color: #8fbcbb;
+      font-family: 'Fira Mono', Consolas, monospace;
+      border-radius: 10px;
+      padding: 15px 20px;
+      overflow-x: auto;
+      font-size: 1rem;
+      line-height: 1.4;
+      box-shadow: inset 0 0 15px #5e81acaa;
+      user-select: text;
+      white-space: pre-wrap;
+      transition: background-color 0.3s ease;
+    }
+
+    details {
+      background: #3b4252;
+      border-radius: 10px;
+      padding: 15px 20px;
+      box-shadow: 0 0 10px #4c566aaa;
+      margin-top: 20px;
+      color: #d8dee9;
+      cursor: pointer;
+      transition: background 0.4s ease;
+    }
+    details[open] {
+      background: #434c5e;
+      box-shadow: 0 0 25px #81a1c1cc;
+    }
+    details summary {
+      font-weight: 700;
+      font-size: 1.2rem;
+      outline-offset: 2px;
+      list-style: none;
+      user-select: none;
+      color: #88c0d0;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      text-shadow: 0 0 6px #88c0d0bb;
+    }
+
+    aside {
+      background: linear-gradient(135deg, #5e81ac, #81a1c1);
+      border-radius: 15px;
+      padding: 25px 30px;
+      color: #eceff4;
+      font-style: italic;
+      font-size: 1.1rem;
+      box-shadow: 0 0 18px #81a1c1cc;
+      margin-bottom: 50px;
+      white-space: pre-wrap;
+      user-select: text;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: background 0.6s ease;
+    }
+    aside h3 {
+      font-family: 'Pacifico', cursive;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #eceff4;
+      text-shadow: 0 0 8px #eceff4cc;
+    }
+
+    footer p {
+      color: #81a1c1;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      user-select: none;
+      text-align: center;
+      margin: 0;
+      padding: 15px 0;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 700px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      section h2 {
+        font-size: 2rem;
+      }
+      nav a {
+        font-size: 1rem;
+      }
+      aside {
+        font-size: 1rem;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Bootstrap Guide</h1>
+  <nav>
+    <a href="#intro">Introduction</a>
+    <a href="#grid-system">Grid System</a>
+    <a href="#components">Components</a>
+    <a href="#utilities">Utilities</a>
+    <a href="#best-practices">Best Practices</a>
+  </nav>
+</header>
+
+<main>
+  <section id="intro" tabindex="0">
+    <h2>What is Bootstrap?</h2>
+    <p><u>Bootstrap</u> is a popular open-source CSS framework for building responsive, mobile-first websites quickly.</p>
+    <p>Key features:</p>
+    <ul>
+      <li>Responsive grid system</li>
+      <li>Pre-styled UI components (buttons, navbars, modals, etc.)</li>
+      <li>Utility classes for spacing, colors, typography, and more</li>
+      <li>JavaScript plugins for interactive components</li>
+      <li>Customizable with Sass variables</li>
+    </ul>
+  </section>
+
+  <section id="grid-system" tabindex="0">
+    <h2>Grid System</h2>
+    <p>Bootstrap uses a 12-column responsive grid system with breakpoints:</p>
+    <ul>
+      <li><code>xs</code> (extra small: &lt;576px)</li>
+      <li><code>sm</code> (small: ≥576px)</li>
+      <li><code>md</code> (medium: ≥768px)</li>
+      <li><code>lg</code> (large: ≥992px)</li>
+      <li><code>xl</code> (extra large: ≥1200px)</li>
+      <li><code>xxl</code> (extra extra large: ≥1400px)</li>
+    </ul>
+    <pre><code>&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-md-6"&gt;Half width on medium screens and up&lt;/div&gt;
+    &lt;div class="col-md-6"&gt;Half width on medium screens and up&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+  </section>
+
+  <section id="components" tabindex="0">
+    <h2>Components</h2>
+    <p>Bootstrap provides many ready-to-use components:</p>
+
+    <h3>Buttons</h3>
+    <pre><code>&lt;button type="button" class="btn btn-primary"&gt;Primary Button&lt;/button&gt;
+&lt;button type="button" class="btn btn-outline-success"&gt;Outline Success&lt;/button&gt;
+</code></pre>
+
+    <h3>Navbar</h3>
+    <pre><code>&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+  &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
+  &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
+    &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+    &lt;ul class="navbar-nav"&gt;
+      &lt;li class="nav-item"&gt;&lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="nav-item"&gt;&lt;a class="nav-link" href="#"&gt;Features&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+</code></pre>
+
+    <h3>Cards</h3>
+    <pre><code>&lt;div class="card" style="width: 18rem;"&gt;
+  &lt;img src="image.jpg" class="card-img-top" alt="..."&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Card title&lt;/h5&gt;
+    &lt;p class="card-text"&gt;Some quick example text.&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Go somewhere&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+  </section>
+
+  <section id="utilities" tabindex="0">
+    <h2>Utility Classes</h2>
+    <p>Bootstrap offers many utility classes to handle spacing, colors, display, and more.</p>
+    <ul>
+      <li><code>m-3</code>: margin on all sides (1rem * 3)</li>
+      <li><code>p-2</code>: padding on all sides (0.5rem * 2)</li>
+      <li><code>text-center</code>: center-align text</li>
+      <li><code>bg-primary</code>: primary background color</li>
+      <li><code>d-flex</code>: flexbox display</li>
+    </ul>
+
+    <pre><code>&lt;div class="p-3 mb-2 bg-success text-white"&gt;Success background with padding&lt;/div&gt;
+&lt;div class="d-flex justify-content-between"&gt;
+  &lt;div&gt;Left&lt;/div&gt;
+  &lt;div&gt;Right&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+  </section>
+
+  <aside id="best-practices" tabindex="0">
+    <h3>Best Practices</h3>
+    <pre>
+✅ Use container classes for responsive fixed or fluid layouts.
+✅ Use the grid system to build flexible responsive layouts.
+✅ Utilize components for consistent UI.
+✅ Avoid excessive overrides; use Bootstrap utility classes.
+✅ Customize with Sass variables if needed.
+✅ Include only needed JS plugins to reduce bundle size.
+✅ Keep accessibility in mind (ARIA attributes, keyboard nav).
+✅ Test responsiveness on different screen sizes.
+    </pre>
+  </aside>
+</main>
+
+<footer>
+  <p>&copy; 2025 TechSphere</p>
+</footer>
+
+</body>
+</html>

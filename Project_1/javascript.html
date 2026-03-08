@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Guide</title>
+  <style>
+    /* Reset & base */
+    /* Reset & base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #282c34, #1f2a48);
+  color: #e0e0e0;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+a {
+  color: #61dafb;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #21a1f1;
+  text-decoration: underline;
+}
+
+/* Header */
+header {
+  background: #20232a;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #61dafb;
+  margin-bottom: 0.4rem;
+  text-shadow: 0 0 10px #61dafb;
+}
+nav {
+  font-size: 1.1rem;
+}
+nav a:not(:last-child)::after {
+  content: "|";
+  margin: 0 10px;
+  color: #444;
+}
+
+/* Main layout */
+main {
+  flex-grow: 1;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 2.5rem;
+}
+
+/* Sections */
+section {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.8rem 2rem;
+  box-shadow: 0 0 20px rgba(97, 218, 251, 0.3);
+  transition: transform 0.3s ease;
+}
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(97, 218, 251, 0.6);
+}
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #61dafb;
+  border-bottom: 2px solid #21a1f1;
+  padding-bottom: 0.4rem;
+  text-shadow: 0 0 5px #21a1f1;
+}
+
+/* Lists styling */
+ul, ol {
+  margin-left: 1.4rem;
+  margin-bottom: 1rem;
+  color: #cfd8dc;
+}
+ul li, ol li {
+  margin-bottom: 0.5rem;
+}
+
+/* Code blocks - limit height and scroll */
+pre {
+  background: #1e1e2f;
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  overflow-y: auto;
+  color: #d4d4dc;
+  box-shadow: inset 0 0 10px #0d47a1;
+  font-family: 'Fira Mono', monospace, monospace;
+  font-size: 0.95rem;
+  margin: 1rem 0;
+  user-select: text;
+  max-height: 250px;  /* limit vertical size */
+}
+
+/* Remove highlight from inline code */
+code {
+  background: transparent !important;
+  color: #61dafb;
+  padding: 0 3px;
+  font-weight: 600;
+  border-radius: 3px;
+  font-family: 'Fira Mono', monospace;
+}
+
+/* Details summary */
+details {
+  background: #151823;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 0 15px rgba(33, 161, 241, 0.5);
+  cursor: pointer;
+}
+details summary {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #61dafb;
+  outline: none;
+  list-style: none;
+}
+details[open] {
+  background: #1b253d;
+  box-shadow: 0 0 25px rgba(33, 161, 241, 0.8);
+}
+details ul, details ol {
+  margin-top: 0.6rem;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  box-shadow: 0 0 15px rgba(33, 161, 241, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+}
+thead {
+  background: #202938;
+  color: #61dafb;
+}
+th, td {
+  padding: 1rem 1.3rem;
+  text-align: left;
+  border-bottom: 1px solid #3b4a6b;
+}
+tbody tr:hover {
+  background: rgba(33, 161, 241, 0.1);
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+/* Aside styling */
+aside {
+  background: #202938;
+  border-radius: 12px;
+  padding: 1.5rem 1.8rem;
+  box-shadow: 0 0 20px rgba(33, 161, 241, 0.4);
+  font-style: italic;
+  color: #a9b7c6;
+  line-height: 1.5;
+  max-height: 350px;       /* limit vertical size */
+  overflow-y: auto;        /* scroll if content too big */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+aside h3 {
+  color: #61dafb;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 5px #21a1f1;
+}
+aside:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(33, 161, 241, 0.9);
+}
+
+/* Control section smaller */
+#control {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+/* Scrollbar styling for webkit browsers */
+aside::-webkit-scrollbar, 
+#control::-webkit-scrollbar,
+pre::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+aside::-webkit-scrollbar-track, 
+#control::-webkit-scrollbar-track,
+pre::-webkit-scrollbar-track {
+  background: #2a2f4a;
+  border-radius: 10px;
+}
+aside::-webkit-scrollbar-thumb,
+#control::-webkit-scrollbar-thumb,
+pre::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 10px;
+  border: 2px solid #2a2f4a; /* padding around thumb */
+}
+
+/* Firefox scrollbar styling */
+aside, #control, pre {
+  scrollbar-width: thin;
+  scrollbar-color: black #2a2f4a;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: #20232a;
+  color: #61dafb;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  box-shadow: 0 -3px 10px rgba(0,0,0,0.6);
+  user-select: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+  nav {
+    font-size: 1rem;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  aside {
+    max-height: none; /* remove fixed height on small screens */
+    overflow: visible;
+  }
+  #control {
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>JavaScript Guide</h1>
+    <nav>
+      <a href="#home">Home</a> 
+      <a href="#about">About</a> 
+      <a href="#services">Features</a> 
+      <a href="#basics">Basics</a> 
+      <a href="#library">Libraries</a> 
+      <a href="#control">Control</a> 
+      <a href="#contact">Events</a>
+    </nav>
+  </header>
+
+  <main id="home">
+
+    <section id="about">
+      <h2>About JavaScript</h2>
+      <p><strong>JavaScript (JS)</strong> is a high-level, interpreted programming language used to create interactive web pages. It enables features such as:</p>
+      <ul>
+        <li>Form validations</li>
+        <li>Animations</li>
+        <li>Real-time updates (e.g., chat apps)</li>
+        <li>Interactive maps</li>
+        <li>Games</li>
+      </ul>
+    </section>
+
+    <section id="services">
+      <h2>Key Features of JavaScript</h2>
+      <p>
+        JavaScript is a <strong>client-side</strong>, <strong>event-driven</strong>, and <strong>interpreted</strong> language. It supports <strong>asynchronous programming</strong> via <code>callbacks</code>, <code>promises</code>, and <code>async/await</code>. It uses a single-threaded model with a non-blocking event loop and provides object-oriented features using prototypes.
+      </p>
+    </section>
+
+    <section id="basics">
+      <h2>JavaScript Basics</h2>
+      <ol>
+        <li>
+          <strong>Syntax and Variables</strong>
+          <pre><code>
+// Declaring variables
+let name = "John";
+const age = 30;
+var isStudent = true;
+          </code></pre>
+        </li>
+
+        <li>
+          <strong>Data Types</strong>
+          <ul>
+            <li>String: "Hello"</li>
+            <li>Number: 123</li>
+            <li>Boolean: true / false</li>
+            <li>Null: null</li>
+            <li>Undefined: undefined</li>
+            <li>Object: { key: value }</li>
+            <li>Array: [1, 2, 3]</li>
+          </ul>
+        </li>
+
+        <li>
+          <strong>Operators</strong>
+          <ul>
+            <li>Arithmetic: + - * / %</li>
+            <li>Comparison: ==, ===, !=, !==, &gt;, &lt;</li>
+            <li>Logical: &&, ||, !</li>
+          </ul>
+        </li>
+
+      </ol>
+
+      <h3>Useful Facts</h3>
+      <details><summary>JavaScript in the Browser</summary>
+        <ul>
+          <li>Runs in browsers like Chrome, Firefox, Safari</li>
+          <li>Can be written in &lt;script&gt; tags or in external .js files</li>
+          <li>Interacts with HTML/CSS via the DOM</li>
+        </ul>
+      </details>
+
+      <details><summary>Tools & Ecosystem</summary>
+        <ul>
+          <li>Node.js – JavaScript runtime for servers</li>
+          <li>npm/yarn – Package managers</li>
+          <li>Webpack, Babel – Bundlers and compilers</li>
+          <li>ESLint, Prettier – Linting and formatting</li>
+        </ul>
+      </details>
+
+      <details><summary>Learning Path</summary>
+        <ol>
+          <li>Basics: Variables, types, functions, DOM</li>
+          <li>Intermediate: Events, objects, arrays, APIs</li>
+          <li>Advanced: Closures, this, promises, async/await</li>
+          <li>Frameworks: React, Vue, etc.</li>
+          <li>Backend: Node.js, Express</li>
+        </ol>
+      </details>
+
+      <details><summary>ES6+ Features</summary>
+        <ul>
+          <li>Arrow functions: <code>() =&gt; {}</code></li>
+          <li>Template literals: <code>`Hello, ${name}`</code></li>
+          <li>Destructuring: <code>const { name } = person;</code></li>
+          <li>Spread operator: <code>[...arr]</code></li>
+        </ul>
+        <pre><code>
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+  speak() {
+    console.log(`${this.name} makes a sound.`);
+  }
+}
+        </code></pre>
+      </details>
+    </section>
+
+    <section id="library">
+      <h2>JavaScript Frameworks & Libraries</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Examples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Libraries</td>
+            <td>jQuery, Lodash, D3.js</td>
+          </tr>
+          <tr>
+            <td>Frameworks</td>
+            <td>React, Angular, Vue.js, Svelte</td>
+          </tr>
+          <tr>
+            <td>Backend</td>
+            <td>Express.js, Nest.js</td>
+          </tr>
+          <tr>
+            <td>Testing</td>
+            <td>Jest, Mocha, Jasmine, Cypress, QUnit, AVA</td>
+          </tr>
+          <tr>
+            <td>Build Tools</td>
+            <td>Webpack, Parcel, Rollup, Gulp, Grunt, Vite</td>
+          </tr>
+          <tr>
+            <td>State Management</td>
+            <td>Redux, MobX, Zustand, Recoil, Vuex, NgRx</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="control">
+      <h2>Control Structures</h2>
+
+      <h3>Conditionals</h3>
+      <pre><code>
+if (age > 18) {
+  console.log("Adult");
+} else {
+  console.log("Minor");
+}
+      </code></pre>
+
+      <h3>Loops</h3>
+      <pre><code>
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+
+while (condition) {
+  // code
+}
+      </code></pre>
+
+      <article>
+        <h3>Functions</h3>
+        <pre><code>
+function greet(name) {
+  return "Hello, " + name;
+}
+
+const sayHi = (name) => `Hi, ${name}`;
+        </code></pre>
+
+        <h3>Objects</h3>
+        <pre><code>
+let person = {
+  name: "Alice",
+  age: 25,
+  greet: function () {
+    console.log("Hello!");
+  },
+};
+        </code></pre>
+
+        <h3>Arrays</h3>
+        <pre><code>
+let colors = ["red", "green", "blue"];
+console.log(colors[0]); // "red"
+        </code></pre>
+      </article>
+    </section>
+
+    <aside>
+      <h3>DOM Manipulation</h3>
+      <p>JavaScript can interact with HTML and CSS through the Document Object Model (DOM).</p>
+      <pre><code>
+document.getElementById("myBtn").addEventListener("click", function() {
+  alert("Button clicked!");
+});
+      </code></pre>
+    </aside>
+
+    <section id="contact">
+      <h2>Events</h2>
+      <ul>
+        <li>click</li>
+        <li>submit</li>
+        <li>mouseover</li>
+        <li>keydown</li>
+      </ul>
+      <pre><code>
+element.addEventListener("event", handlerFunction);
+      </code></pre>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TechSphere</p>
+  </footer>
+
+</body>
+</html>

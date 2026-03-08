@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Java Guide</title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #f9fafc;
+      color: #333;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      text-decoration: none;
+      color: #007acc;
+      transition: color 0.3s ease;
+    }
+    a:hover,
+    a:focus {
+      color: #005f99;
+      outline: none;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(90deg, #007acc 0%, #005f99 100%);
+      color: #fff;
+      padding: 20px 30px;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    #backButton {
+      background: transparent;
+      border: 2px solid #fff;
+      color: #fff;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    #backButton:hover,
+    #backButton:focus {
+      background-color: #fff;
+      color: #007acc;
+      outline: none;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      user-select: none;
+      flex-grow: 1;
+      min-width: 150px;
+    }
+    nav {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 15px;
+      flex-grow: 1;
+    }
+    nav a {
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 30px;
+      background: rgb(10, 166, 228);
+      color: white;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover,
+    nav a:focus {
+      background: #fff;
+      color: #007acc;
+      box-shadow: 0 4px 12px rgb(0 122 204 / 0.3);
+    }
+
+    /* Main content container */
+    main {
+      flex-grow: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgb(0 0 0 / 0.07);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 50px;
+    }
+    h2 {
+      font-size: 1.9rem;
+      border-bottom: 3px solid #007acc;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      color: #004a7c;
+    }
+    h3 {
+      color: #006bb3;
+      margin-top: 30px;
+    }
+    p, ul {
+      font-size: 1.1rem;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 10px;
+    }
+    u {
+      color: #007acc;
+      font-weight: 600;
+    }
+
+    /* Code styling */
+    code {
+      font-family: 'Source Code Pro', monospace;
+      /* background: #f5f7fa; */
+      color: #c7254e;
+      padding: 3px 6px;
+      border-radius: 5px;
+      font-size: 0.95rem;
+    }
+    pre {
+      /* background: #2d2d2d; */
+      color: #f8f8f2;
+      padding: 15px 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 0.9rem;
+      box-shadow: inset 0 0 10px #00000080;
+      margin-top: 15px;
+      transition: transform 0.3s ease;
+    }
+    pre:hover {
+      transform: scale(1.02);
+    }
+
+    /* Details styling */
+    details summary {
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-top: 15px;
+      padding: 10px;
+      background: #e6f0fb;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgb(0 122 204 / 0.1);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    details summary:hover {
+      background: #d0e4fb;
+    }
+    details[open] summary {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    details p {
+      margin: 12px 0 0 0;
+      font-size: 1rem;
+      color: #444;
+    }
+
+    /* Aside for best practices */
+    aside {
+      background: #e9f1fb;
+      padding: 25px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgb(0 122 204 / 0.1);
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #004a7c;
+      white-space: pre-line;
+    }
+    aside h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: #003663;
+    }
+
+    /* Footer */
+    footer {
+      background: #007acc;
+      color: #fff;
+      text-align: center;
+      padding: 18px 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      user-select: none;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      margin-top: auto;
+      box-shadow: 0 -4px 10px rgb(0 0 0 / 0.15);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      nav {
+        justify-content: center;
+        gap: 10px;
+      }
+      main {
+        margin: 25px 15px;
+        padding-bottom: 40px;
+      }
+      header h1 {
+        font-size: 1.8rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+      h3 {
+        font-size: 1.3rem;
+      }
+      pre {
+        font-size: 0.85rem;
+      }
+    }
+    @media (max-width: 480px) {
+      header {
+        padding: 15px 20px;
+        justify-content: center;
+        gap: 10px;
+      }
+      #backButton {
+        padding: 5px 10px;
+        font-size: 0.9rem;
+        margin: 0;
+        flex-shrink: 0;
+      }
+      nav {
+        flex-direction: column;
+        gap: 8px;
+        justify-content: center;
+        width: 100%;
+      }
+      nav a {
+        padding: 10px;
+        font-size: 1rem;
+        text-align: center;
+        width: 100%;
+        border-radius: 8px;
+      }
+      main {
+        margin: 15px 10px;
+      }
+      header h1 {
+        font-size: 1.5rem;
+        flex-basis: 100%;
+        text-align: center;
+      }
+      aside {
+        font-size: 1rem;
+        padding: 20px 15px;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <button id="backButton" aria-label="Go back to previous page">&larr; Back</button>
+  <h1>Java Guide</h1>
+  <nav aria-label="Primary Navigation">
+    <a href="#intro">Introduction</a>
+    <a href="#basics">Basics</a>
+    <a href="#oop">OOP Concepts</a>
+    <a href="#syntax">Syntax</a>
+    <a href="#best-practices">Best Practices</a>
+  </nav>
+</header>
+
+<main>
+  <section id="intro">
+    <h2>What is Java?</h2>
+    <p><u>Java</u> is a high-level, class-based, object-oriented programming language designed to have as few implementation dependencies as possible.</p>
+    <p>It is widely used for:</p>
+    <ul>
+      <li>Enterprise applications</li>
+      <li>Android app development</li>
+      <li>Web servers and application servers</li>
+      <li>Embedded systems</li>
+    </ul>
+  </section>
+
+  <section id="basics">
+    <h2>Java Basics</h2>
+    <p>Java programs are written in <code>.java</code> files and compiled into bytecode (.class files) that run on the Java Virtual Machine (JVM).</p>
+
+    <h3>Hello World Example</h3>
+    <pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}</code></pre>
+
+    <h3>Primitive Data Types</h3>
+    <ul>
+      <li><strong>int</strong> - integer numbers</li>
+      <li><strong>double</strong> - floating-point numbers</li>
+      <li><strong>boolean</strong> - true or false</li>
+      <li><strong>char</strong> - single character</li>
+    </ul>
+  </section>
+
+  <section id="oop">
+    <h2>Object-Oriented Programming (OOP) Concepts</h2>
+    <p>Java is fundamentally object-oriented, focusing on:</p>
+    <details>
+      <summary>Classes & Objects</summary>
+      <p>Blueprints for creating objects.</p>
+      <pre><code>class Dog {
+    String name;
+    int age;
+
+    void bark() {
+        System.out.println("Woof!");
+    }
+}</code></pre>
+    </details>
+
+    <details>
+      <summary>Inheritance</summary>
+      <p>Allows classes to inherit fields and methods from other classes.</p>
+      <pre><code>class Animal {
+    void eat() {
+        System.out.println("Eating...");
+    }
+}
+
+class Cat extends Animal {
+    void meow() {
+        System.out.println("Meow!");
+    }
+}</code></pre>
+    </details>
+
+    <details>
+      <summary>Encapsulation</summary>
+      <p>Hiding internal state and requiring all interaction through methods.</p>
+      <pre><code>class Person {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+}</code></pre>
+    </details>
+
+    <details>
+      <summary>Polymorphism</summary>
+      <p>Ability to take many forms, e.g., method overriding.</p>
+      <pre><code>class Animal {
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}</code></pre>
+    </details>
+  </section>
+
+  <section id="syntax">
+    <h2>Java Syntax Essentials</h2>
+    <ul>
+      <li>Statements end with a semicolon <code>;</code></li>
+      <li>Blocks of code use curly braces <code>{ }</code></li>
+      <li>Comments:
+        <ul>
+          <li>Single-line: <code>// comment</code></li>
+          <li>Multi-line: <code>/* comment */</code></li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Control Structures</h3>
+    <pre><code>// If-else
+if (x > 0) {
+    System.out.println("Positive");
+} else {
+    System.out.println("Non-positive");
+}
+
+// For loop
+for (int i = 0; i < 5; i++) {
+    System.out.println(i);
+}
+
+// While loop
+while (x < 10) {
+    x++;
+}</code></pre>
+
+    <h3>Methods</h3>
+    <pre><code>public int add(int a, int b) {
+    return a + b;
+}</code></pre>
+  </section>
+
+  <aside id="best-practices">
+    <h3>Best Practices</h3>
+✅ Use meaningful variable and method names.<br>
+✅ Follow Java naming conventions (camelCase, PascalCase).<br>
+✅ Keep methods small and focused.<br>
+✅ Comment your code where necessary.<br>
+✅ Handle exceptions properly using try-catch.<br>
+✅ Use access modifiers to encapsulate data.<br>
+✅ Write unit tests to verify your code.
+  </aside>
+</main>
+
+<footer>
+  <p>&copy; 2025 TechSphere</p>
+</footer>
+
+<script>
+  // Back button functionality
+  document.getElementById('backButton').addEventListener('click', () => {
+    if (document.referrer) {
+      history.back();
+    } else {
+      alert('No previous page found');
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+/* Base reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #eee;
+}
+
+/* Animated background */
+body {
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Gradient animation */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Glass container */
+.container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.37);
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Heading */
+#heading h1 {
+    color: #fff;
+    font-size: 2.4rem;
+    text-align: center;
+    text-shadow: 0 0 12px rgba(7, 179, 242, 0.9);
+}
+
+/* Form styles */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form input[type="email"],
+.form input[type="password"] {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #eee;
+    transition: all 0.3s ease;
+}
+
+.form input:focus {
+    border: 1px solid #07b3f2;
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 8px rgba(7, 179, 242, 0.6);
+}
+
+/* Sign In button */
+#signIn {
+    padding: 0.75rem;
+    background: linear-gradient(90deg, #07b3f2, #0288d1);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(7, 179, 242, 0.4);
+}
+
+#signIn:hover {
+    background: linear-gradient(90deg, #0288d1, #07b3f2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(7, 179, 242, 0.6);
+}
+
+#signIn:active {
+    transform: translateY(1px);
+    box-shadow: none;
+}
+
+/* Forgot & Sign up links */
+.auth-links {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+#forgotPass,
+#signUp {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    text-decoration: underline;
+    color: #aaa;
+    transition: color 0.3s ease;
+}
+
+#forgotPass:hover,
+#signUp:hover {
+    color: #07b3f2;
+}
+
+#forgotPass:active,
+#signUp:active {
+    color: #0288d1;
+}
+
+/* Sign Up spacing */
+#sUP {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    font-size: 0.95rem;
+}
+
+/* Social Buttons */
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+button[id^="b"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+/* Button images */
+button[id^="b"] img {
+    height: 22px;
+    width: 22px;
+    object-fit: contain;
+}
+
+/* Social Colors */
+#b1 {
+    background-color: #ea4335;
+}
+#b1:hover {
+    background-color: #d93025;
+}
+#b1:active {
+    transform: scale(0.98);
+}
+
+#b2 {
+    background-color: #3b5998;
+}
+#b2:hover {
+    background-color: #2d4373;
+}
+#b2:active {
+    transform: scale(0.98);
+}
+
+#b3 {
+    background-color: #0a66c2;
+}
+#b3:hover {
+    background-color: #004182;
+}
+#b3:active {
+    transform: scale(0.98);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    #heading h1 {
+        font-size: 2rem;
+    }
+
+    .form input,
+    #signIn,
+    button[id^="b"] {
+        font-size: 1rem;
+    }
+}

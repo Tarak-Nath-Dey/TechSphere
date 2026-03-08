@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS3 Guide</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: #0f0f0f;
+      color: #f5f5f5;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ff0080, #7928ca, #2af598);
+      padding: 20px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      animation: gradient 8s ease infinite;
+      background-size: 400% 400%;
+      position: sticky;
+    }
+
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px rgba(255,255,255,0.8);
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      margin: 0 15px;
+      font-size: 1.1rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      display: block;
+      margin-top: 5px;
+      right: 0;
+      background: white;
+      transition: width 0.3s ease;
+      -webkit-transition: width 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ff0;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+      left: 0;
+      background: #ff0;
+    }
+
+    main, section {
+      padding: 40px 10%;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      border-left: 5px solid #ff0;
+      padding-left: 10px;
+      text-shadow: 0 0 10px rgba(255,255,0,0.6);
+    }
+
+    h3 {
+      margin: 20px 0 10px;
+      color: #2af598;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    ol, ul {
+      padding-left: 20px;
+    }
+
+    code, pre {
+      background: #1e1e1e;
+      color: #00ffcc;
+      padding: 10px;
+      border-radius: 8px;
+      display: block;
+      margin: 10px 0;
+      font-family: "Courier New", monospace;
+      box-shadow: 0 0 10px rgba(0,255,204,0.3);
+    }
+
+    details {
+      background: #181818;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 1px solid #333;
+    }
+
+    details summary {
+      font-weight: bold;
+      color: #ff80ff;
+    }
+
+    article, aside {
+      background: #151515;
+      margin: 20px 0;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+    }
+
+    aside h3 {
+      color: #ff4d4d;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      color: #aaa;
+      font-size: 0.9rem;
+      border-top: 1px solid #333;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      main, section {
+        padding: 20px 5%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CSS3 Guide</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section id="about">
+      <h2>About CSS</h2>
+      <p><u>CSS</u> stands for <i>Cascading Style Sheets</i>.
+         It describes how HTML elements should be displayed (color, size, spacing, layout).
+         CSS separates content (HTML) from presentation (design).
+         It is used with HTML and JavaScript in the frontend web development trio.</p>
+    </section>
+
+    <section id="services">
+      <h2>Ways to Apply CSS</h2>
+      <ol>
+        <li>Inline CSS</li>
+        <code>&lt;p style="color: red;"&gt;Hello&lt;/p&gt;</code>
+
+        <li>Internal CSS</li>
+        <code>
+            &lt;style&gt; 
+                p { color: blue; } 
+            &lt;/style&gt;
+        </code>
+
+        <li>External CSS</li>
+        <code>&lt;link rel="stylesheet" href="style.css"&gt;</code>
+      </ol>
+
+      <p><strong>Selectors in CSS</strong></p>
+      <details><summary>Basic Selectors:</summary>
+        <ul>
+          <li>Universal: * { margin: 0; }</li>
+          <li>Element: p { color: red; }</li>
+          <li>Class: .box { border: 1px solid; }</li>
+          <li>ID: #main { background: yellow; }</li>
+          <li>Grouping: h1, h2 { color: blue; }</li>
+        </ul>
+      </details>
+      <details><summary>Combinators:</summary>
+        <ul>
+          <li>Descendant: div p { color: green; }</li>
+          <li>Child: div > p { color: red; }</li>
+          <li>Adjacent sibling: h1 + p { font-style: italic; }</li>
+          <li>General sibling: h1 ~ p { font-weight: bold; }</li>
+        </ul>
+      </details>
+      <details><summary>Attribute Selectors:</summary>
+        input[type="text"] { border: 1px solid black; } <br>
+        a[target="_blank"] { color: red; }
+      </details>
+      <details><summary>Pseudo-classes:</summary>
+        a:hover { color: red; } <br>
+        input:focus { border: 2px solid blue; } <br>
+        li:first-child { font-weight: bold; } <br>
+      </details>
+      <details><summary>Pseudo-elements:</summary>
+        p::first-letter { font-size: 2em; } <br>
+        p::after { content: " ✅"; }
+      </details>
+
+      <h2>Positioning</h2>
+      <ul>
+        <li>static (default)</li>
+        <li>relative</li>
+        <li>absolute</li>
+        <li>fixed</li>
+        <li>sticky</li>
+      </ul>
+
+      <pre><code>
+    div {
+        position: absolute;
+        top: 50px;
+        left: 100px;
+    }
+      </code></pre>
+
+      <article>
+        <h3>Colors in CSS</h3>
+        <ul>
+          <li>Named colors: red, blue</li>
+          <li>HEX: #ff0000</li>
+          <li>RGB: rgb(255,0,0)</li>
+          <li>RGBA: rgba(255,0,0,0.5)</li>
+          <li>HSL: hsl(0, 100%, 50%)</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Box Model</h3>
+        <p>Every HTML element is a box with:</p>
+        <ul>
+          <li>Content</li>
+          <li>Padding (space inside border)</li>
+          <li>Border</li>
+          <li>Margin (space outside border)</li>
+        </ul>
+        <pre><code>
+  div {
+      width: 200px;
+      padding: 10px;
+      border: 2px solid black; 
+      margin: 20px;
+  }
+        </code></pre>
+      </article>
+    </section>
+
+    <aside>
+      <h3>Best Practices</h3>
+      <pre>
+✅ Use external CSS for maintainability. 
+✅ Follow mobile-first responsive design. 
+✅ Use semantic HTML + CSS for accessibility. 
+✅ Avoid inline styles. 
+✅ Use CSS variables for theme consistency. 
+✅ Minify CSS in production for performance. 
+      </pre>
+    </aside>
+  </main>
+
+  <section id="contact">
+    <h2>Responsive Design</h2>
+    <ul>
+      <li>Media Queries</li>
+      <pre>
+  @media (max-width: 768px) {
+    body {
+      background: lightgray; 
+    }
+  }</pre>
+      <li>Responsive units (%, em, rem, vh, vw)</li>
+      <li>Mobile-first design</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 TechSphere</p>
+  </footer>
+
+</body>
+</html>

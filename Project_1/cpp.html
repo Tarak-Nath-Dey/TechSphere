@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>C++ Guide ‑ Dark & Dynamic</title>
+  <style>
+/* 🌈 Vibrant Gradient Background */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #f0f0f0;
+  scroll-behavior: smooth;
+}
+
+/* 🎆 Header Styling */
+header {
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  padding: 1rem 2rem;
+  text-align: center;
+  animation: fadeInDown 1.2s ease;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 2px 2px #000;
+}
+
+/* 🧭 Navigation */
+nav {
+  margin-top: 1rem;
+}
+
+nav a {
+  margin: 0 1rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #fff;
+  transition: 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* 📚 Section Styling */
+main section {
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  animation: fadeInUp 1s ease;
+}
+
+main h2 {
+  font-size: 2rem;
+  color: #ffcc70;
+  border-bottom: 2px solid #ffcc70;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+main h3 {
+  color: #ffd700;
+  margin-top: 1.5rem;
+}
+
+/* 💻 Code Blocks */
+pre {
+  background: #1e1e2f;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  color: #00ffcc;
+  font-family: 'Courier New', monospace;
+  box-shadow: inset 0 0 10px #000;
+}
+
+/* 📋 Lists */
+ul {
+  list-style: square;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin: 0.5rem 0;
+}
+
+/* 🔍 Details & Summary */
+details {
+  margin: 1rem 0;
+  background: #2a2a3d;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+summary {
+  font-weight: bold;
+  cursor: pointer;
+  color: #00ffff;
+}
+
+/* 🧠 Aside */
+aside {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  padding: 1.5rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+/* 🧾 Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #111;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* ✨ Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🖱️ Interactive Focus */
+section:focus, aside:focus {
+  outline: 3px solid #ffcc70;
+  transition: outline 0.3s ease-in-out;
+}
+</style>
+
+</head>
+<body>
+  <header>
+    <h1>C++ Guide</h1>
+    <nav>
+      <a href="#intro">Introduction</a>
+      <a href="#basics">Basics</a>
+      <a href="#oop">OOP</a>
+      <a href="#stl">STL</a>
+      <a href="#advanced">Advanced Concepts</a>
+      <a href="#best-practices">Best Practices</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="intro" tabindex="0">
+      <h2>What is C++?</h2>
+      <p><u>C++</u> is a powerful, high‑performance, general‑purpose programming language developed as an extension of C.</p>
+      <p>Widely used for:</p>
+      <ul>
+        <li>System/software development</li>
+        <li>Game development</li>
+        <li>Real‑time simulations</li>
+        <li>High‑performance applications</li>
+        <li>Embedded systems</li>
+      </ul>
+    </section>
+
+    <section id="basics" tabindex="0">
+      <h2>C++ Basics</h2>
+
+      <h3>Hello World</h3>
+      <pre><code>#include &lt;iostream&gt;
+
+int main() {
+    std::cout &lt;&lt; "Hello, World!" &lt;&lt; std::endl;
+    return 0;
+}</code></pre>
+
+      <h3>Data Types</h3>
+      <ul>
+        <li><strong>int</strong>, <strong>float</strong>, <strong>double</strong>, <strong>char</strong>, <strong>bool</strong></li>
+        <li><strong>string</strong> (from <code>&lt;string&gt;</code>)</li>
+        <li>User‑defined types with <code>struct</code> and <code>class</code></li>
+      </ul>
+
+      <h3>Basic Syntax</h3>
+      <ul>
+        <li>Statements end with <code>;</code></li>
+        <li>Curly braces <code>{ }</code> define blocks</li>
+        <li>Single‑line comments: <code>// comment</code></li>
+        <li>Multi‑line comments: <code>/* comment */</code></li>
+      </ul>
+
+      <h3>Control Flow</h3>
+      <pre><code>int x = 10;
+
+if (x > 0) {
+    std::cout &lt;&lt; "Positive" &lt;&lt; std::endl;
+} else {
+    std::cout &lt;&lt; "Non‑positive" &lt;&lt; std::endl;
+}
+
+for (int i = 0; i &lt; 5; ++i) {
+    std::cout &lt;&lt; i &lt;&lt; std::endl;
+}
+
+int count = 0;
+while (count &lt; 5) {
+    std::cout &lt;&lt; count &lt;&lt; std::endl;
+    ++count;
+}</code></pre>
+
+      <h3>Functions</h3>
+      <pre><code>int add(int a, int b) {
+    return a + b;
+}</code></pre>
+    </section>
+
+    <section id="oop" tabindex="0">
+      <h2>Object‑Oriented Programming (OOP)</h2>
+
+      <h3>Classes and Objects</h3>
+      <pre><code>class Person {
+public:
+    std::string name;
+
+    Person(std::string n) : name(n) {}
+
+    void greet() {
+        std::cout &lt;&lt; "Hello, " &lt;&lt; name &lt;&lt; std::endl;
+    }
+};
+
+int main() {
+    Person p("Alice");
+    p.greet();
+    return 0;
+}</code></pre>
+
+      <h3>Key OOP Concepts</h3>
+      <details>
+        <summary>Encapsulation</summary>
+        <p>Data hiding using <code>private</code> and <code>protected</code> access specifiers.</p>
+      </details>
+
+      <details>
+        <summary>Inheritance</summary>
+        <pre><code>class Animal {
+public:
+    void speak() {
+        std::cout &lt;&lt; "Animal sound" &lt;&lt; std::endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void speak() {
+        std::cout &lt;&lt; "Woof!" &lt;&lt; std::endl;
+    }
+};
+
+int main() {
+    Dog d;
+    d.speak();
+    return 0;
+}</code></pre>
+      </details>
+
+      <details>
+        <summary>Polymorphism (Virtual Functions)</summary>
+        <pre><code>class Animal {
+public:
+    virtual void speak() {
+        std::cout &lt;&lt; "Animal sound" &lt;&lt; std::endl;
+    }
+};
+
+class Cat : public Animal {
+public:
+    void speak() override {
+        std::cout &lt;&lt; "Meow" &lt;&lt; std::endl;
+    }
+};
+
+void makeSpeak(Animal* a) {
+    a‑&gt;speak();
+}
+
+int main() {
+    Animal* a = new Cat();
+    makeSpeak(a);
+    delete a;
+    return 0;
+}</code></pre>
+      </details>
+
+      <details>
+        <summary>Constructors and Destructors</summary>
+        <pre><code>class Resource {
+public:
+    Resource() {
+        std::cout &lt;&lt; "Acquired resource" &lt;&lt; std::endl;
+    }
+    ~Resource() {
+        std::cout &lt;&lt; "Released resource" &lt;&lt; std::endl;
+    }
+};</code></pre>
+      </details>
+    </section>
+
+    <section id="stl" tabindex="0">
+      <h2>Standard Template Library (STL)</h2>
+      <p>Powerful library of generic data structures and algorithms.</p>
+
+      <h3>Common Containers</h3>
+      <ul>
+        <li><code>std::vector</code> — dynamic array</li>
+        <li><code>std::list</code> — doubly linked list</li>
+        <li><code>std::map</code> — sorted key‑value map</li>
+        <li><code>std::unordered_map</code> — hash table</li>
+        <li><code>std::set</code> — sorted unique elements</li>
+      </ul>
+
+      <h3>Example: Vector Usage</h3>
+      <pre><code>#include &lt;vector&gt;
+#include &lt;iostream&gt;
+
+int main() {
+    std::vector&lt;int&gt; numbers = {1, 2, 3, 4, 5};
+    numbers.push_back(6);
+
+    for (int n : numbers) {
+        std::cout &lt;&lt; n &lt;&lt; " ";
+    }
+    std::cout &lt;&lt; std::endl;
+    return 0;
+}</code></pre>
+
+      <h3>Algorithms</h3>
+      <p>Functions like <code>std::sort</code>, <code>std::find</code>, and many others.</p>
+      <pre><code>#include &lt;algorithm&gt;  // for std::sort
+#include &lt;vector&gt;
+
+std::vector&lt;int&gt; v = {3, 1, 4, 1, 5};
+std::sort(v.begin(), v.end());</code></pre>
+    </section>
+
+    <section id="advanced" tabindex="0">
+      <h2>Advanced Concepts</h2>
+
+      <details>
+        <summary>Templates (Generic Programming)</summary>
+        <pre><code>template &lt;typename T&gt;
+T add(T a, T b) {
+    return a + b;
+}
+
+int main() {
+    std::cout &lt;&lt; add(3, 4) &lt;&lt; std::endl;
+    std::cout &lt;&lt; add(3.5, 2.5) &lt;&lt; std::endl;
+    return 0;
+}</code></pre>
+      </details>
+
+      <details>
+        <summary>Exception Handling</summary>
+        <pre><code>try {
+    // code that may throw
+} catch (const std::exception&amp; e) {
+    std::cerr &lt;&lt; "Error: " &lt;&lt; e.what() &lt;&lt; std::endl;
+}</code></pre>
+      </details>
+
+      <details>
+        <summary>Smart Pointers</summary>
+        <pre><code>#include &lt;memory&gt;
+
+std::unique_ptr&lt;int&gt; p1(new int(5));  // automatically deletes when out of scope
+std::shared_ptr&lt;int&gt; p2 = std::make_shared&lt;int&gt;(10);</code></pre>
+      </details>
+
+      <details>
+        <summary>Move Semantics &amp; Rvalue References</summary>
+        <p>Optimize performance by avoiding unnecessary copies.</p>
+        <pre><code>void foo(std::string&& s) {
+    std::cout &lt;&lt; s &lt;&lt; std::endl;
+}</code></pre>
+      </details>
+    </section>
+
+    <aside tabindex="0">
+      <h3>Best Practices</h3>
+      <pre>
+✅ Use RAII (Resource Acquisition Is Initialization) for resource management.
+✅ Prefer STL containers over raw arrays.
+✅ Avoid raw pointers; use smart pointers where possible.
+✅ Follow consistent naming conventions.
+✅ Write small, reusable functions and classes.
+✅ Use const‑correctness.
+✅ Handle exceptions appropriately.
+✅ Comment and document your code clearly.
+      </pre>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TechSphere</p>
+  </footer>
+</body>
+</html>

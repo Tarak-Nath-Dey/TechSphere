@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>React Guide</title>
+  <style>
+    /* Base & Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f0e6; /* Sandy beige */
+      color: #264d4d; /* Dark teal */
+      line-height: 1.65;
+      padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    a {
+      color: #008080; /* Teal */
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+      color: #005050; /* Darker teal */
+      text-decoration: underline;
+      outline-offset: 3px;
+    }
+
+    /* Header */
+    header {
+      width: 100%;
+      max-width: 900px;
+      background: #cde6e6; /* Light teal */
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 128, 128, 0.25);
+      padding: 2rem 2.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0 0 0.5rem 0;
+      font-weight: 900;
+      font-size: 3rem;
+      color: #005050; /* Dark teal */
+      letter-spacing: 0.05em;
+      text-shadow: 1px 1px 2px #7bbdbd;
+    }
+    nav {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    nav a {
+      margin: 0 1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* Main */
+    main {
+      max-width: 900px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    section {
+      background: #e6f2f2; /* Very light teal */
+      padding: 1.8rem 2.4rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 128, 128, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    section:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0, 128, 128, 0.3);
+    }
+    section h2 {
+      color: #005050;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      border-bottom: 3px solid #008080;
+      padding-bottom: 0.4rem;
+      font-size: 2.2rem;
+      letter-spacing: 0.02em;
+    }
+    section h3 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.7rem;
+      color: #007070;
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+    section p, section ul, section ol {
+      margin-bottom: 1.4rem;
+      color: #3b5a5a;
+    }
+    ul, ol {
+      margin-left: 1.5rem;
+    }
+    ul li, ol li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Details styling */
+    details {
+      background: #cde6e6;
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      box-shadow: 0 0 12px rgba(0, 128, 128, 0.25);
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.3s ease;
+    }
+    details[open] {
+      background: #a1cfcf;
+      box-shadow: 0 0 25px rgba(0, 128, 128, 0.4);
+    }
+    details summary {
+      font-weight: 700;
+      font-size: 1.15rem;
+      outline-offset: 2px;
+      list-style: none;
+      user-select: none;
+      color: #007070;
+    }
+    details p, details ul {
+      margin-top: 0.6rem;
+      color: #3b5a5a;
+    }
+    details ul {
+      margin-left: 1.3rem;
+    }
+
+    /* Code blocks */
+    pre, code {
+      background: #d1e7e7;
+      color: #004c4c;
+      font-family: 'Fira Mono', Consolas, monospace;
+      border-radius: 10px;
+      padding: 1rem 1.3rem;
+      overflow-x: auto;
+      box-shadow: inset 0 0 10px rgba(0, 76, 76, 0.3);
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+    pre {
+      margin: 1rem 0 1.5rem 0;
+      max-height: 240px;
+    }
+    code {
+      padding: 0.2rem 0.5rem;
+      display: inline-block;
+      font-weight: 600;
+    }
+
+    /* Aside styling */
+    aside {
+      background: #b4d8d8;
+      padding: 1.6rem 1.8rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 128, 128, 0.25);
+      color: #2e5555;
+      font-style: italic;
+      max-height: 350px;
+      overflow-y: auto;
+      line-height: 1.5;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    aside:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0, 128, 128, 0.4);
+    }
+    aside h3 {
+      color: #007070;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    aside pre {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      box-shadow: none;
+      font-style: normal;
+      overflow: visible;
+      font-size: 1rem;
+      user-select: text;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      padding: 1.4rem 1rem;
+      border-radius: 15px;
+      background: #cde6e6;
+      box-shadow: 0 -4px 15px rgba(0, 128, 128, 0.25);
+      color: #004c4c;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+
+    /* Scrollbars */
+    aside::-webkit-scrollbar,
+    pre::-webkit-scrollbar {
+      width: 9px;
+      height: 9px;
+    }
+    aside::-webkit-scrollbar-track,
+    pre::-webkit-scrollbar-track {
+      background: #a1cfcf;
+      border-radius: 9px;
+    }
+    aside::-webkit-scrollbar-thumb,
+    pre::-webkit-scrollbar-thumb {
+      background-color: #004c4c;
+      border-radius: 9px;
+      border: 2px solid #a1cfcf;
+    }
+    aside, pre {
+      scrollbar-width: thin;
+      scrollbar-color: #004c4c #a1cfcf;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      main {
+        display: block;
+      }
+      section, aside {
+        max-width: 100%;
+        margin-bottom: 2.5rem;
+      }
+      nav a {
+        margin: 0 0.8rem;
+      }
+      header h1 {
+        font-size: 2.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>React Guide</h1>
+  <nav aria-label="Primary navigation">
+    <a href="#intro">Introduction</a>
+    <a href="#jsx">JSX</a>
+    <a href="#components">Components</a>
+    <a href="#state-hooks">State & Hooks</a>
+    <a href="#props">Props</a>
+    <a href="#best-practices">Best Practices</a>
+  </nav>
+</header>
+
+<main>
+  <section id="intro" tabindex="0">
+    <h2>What is React?</h2>
+    <p><u>React</u> is a popular JavaScript library for building user interfaces, especially single-page applications.</p>
+    <p>Key features:</p>
+    <ul>
+      <li>Component-based architecture</li>
+      <li>Declarative UI</li>
+      <li>Virtual DOM for efficient rendering</li>
+      <li>Unidirectional data flow</li>
+      <li>Rich ecosystem & community</li>
+    </ul>
+  </section>
+
+  <section id="jsx" tabindex="0">
+    <h2>JSX (JavaScript XML)</h2>
+    <p>JSX lets you write HTML-like syntax inside JavaScript.</p>
+    <pre><code>const element = &lt;h1&gt;Hello, React!&lt;/h1&gt;;</code></pre>
+    <p>Under the hood, JSX is compiled to <code>React.createElement</code> calls.</p>
+  </section>
+
+  <section id="components" tabindex="0">
+    <h2>Components</h2>
+
+    <h3>Functional Component</h3>
+    <pre><code>function Welcome(props) {
+  return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+}</code></pre>
+
+    <h3>Class Component</h3>
+    <pre><code>class Welcome extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello, {this.props.name}!&lt;/h1&gt;;
+  }
+}</code></pre>
+  </section>
+
+  <section id="state-hooks" tabindex="0">
+    <h2>State and Hooks</h2>
+
+    <h3>useState Hook (Functional)</h3>
+    <pre><code>import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;You clicked {count} times&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Click me&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+    <h3>Class Component State</h3>
+    <pre><code>class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;p&gt;You clicked {this.state.count} times&lt;/p&gt;
+        &lt;button onClick={() =&gt; this.setState({ count: this.state.count + 1 })}&gt;Click me&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+}</code></pre>
+
+    <details>
+      <summary>Other Common Hooks</summary>
+      <ul>
+        <li><code>useEffect</code> - side effects and lifecycle management</li>
+        <li><code>useContext</code> - context API for global state</li>
+        <li><code>useReducer</code> - complex state logic</li>
+      </ul>
+    </details>
+  </section>
+
+  <section id="props" tabindex="0">
+    <h2>Props</h2>
+    <p>Props are how components receive data.</p>
+    <pre><code>function Greeting(props) {
+  return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+}
+
+&lt;Greeting name="Alice" /&gt;</code></pre>
+  </section>
+
+  <aside id="best-practices" tabindex="0" aria-label="Best Practices">
+    <h3>Best Practices</h3>
+    <pre>
+✅ Use functional components and hooks for cleaner code.
+✅ Keep components small and focused (Single Responsibility Principle).
+✅ Lift state up to the nearest common ancestor.
+✅ Use PropTypes or TypeScript for type safety.
+✅ Avoid unnecessary re-renders with memoization.
+✅ Organize components and files by feature.
+✅ Write tests for components (Jest, React Testing Library).
+✅ Use React DevTools for debugging.
+    </pre>
+  </aside>
+</main>
+
+<footer>
+  <p>&copy; 2025 TechSphere</p>
+</footer>
+
+</body>
+</html>

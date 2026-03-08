@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Node.js Guide</title>
+  <style>
+    /* Base & Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+      color: #2b2d42;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: backgroundShift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes backgroundShift {
+      0% {
+        background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+      }
+      50% {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      }
+      100% {
+        background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+      }
+    }
+
+    header, footer {
+      background-color: #8d99ae;
+      padding: 20px 35px;
+      text-align: center;
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(45, 52, 54, 0.3);
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 30px;
+      color: #edf2f4;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated glow effect on header/footer */
+    header::before,
+    footer::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, #ef476f 10%, transparent 70%);
+      opacity: 0.15;
+      animation: pulseGlow 6s ease-in-out infinite;
+      pointer-events: none;
+      border-radius: 20px;
+      z-index: 0;
+    }
+    header > *, footer > * {
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes pulseGlow {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.15;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.3;
+      }
+    }
+
+    nav {
+      margin-top: 15px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #ef476f;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #ffd166;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: #ffd166;
+      outline-offset: 3px;
+      outline: 2px solid #ffd166;
+      border-radius: 4px;
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 100%;
+    }
+
+    main {
+      max-width: 900px;
+      width: 100%;
+    }
+
+    section {
+      background: #fff9f9;
+      padding: 2rem 2.8rem;
+      border-radius: 25px;
+      margin-bottom: 45px;
+      box-shadow: 0 8px 30px rgba(239, 71, 111, 0.12);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      color: #33303d;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+    section:hover, section:focus-within {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 15px 40px rgba(239, 71, 111, 0.3);
+    }
+    section h2 {
+      color: #ef476f;
+      margin-bottom: 1.2rem;
+      font-weight: 900;
+      font-size: 2.3rem;
+      letter-spacing: 0.03em;
+      border-left: 5px solid #ffd166;
+      padding-left: 15px;
+      text-shadow: 1px 1px 2px #f6bd60aa;
+    }
+    section ul {
+      margin-left: 1.8rem;
+      margin-top: 1rem;
+      list-style-type: disc;
+      color: #555160;
+      font-weight: 600;
+    }
+    section ul li {
+      margin-bottom: 0.6rem;
+    }
+    section p {
+      margin-bottom: 1.3rem;
+      font-size: 1.1rem;
+      color: #555160;
+      font-weight: 500;
+    }
+
+    code, pre {
+      background: #ffd166;
+      color: #6a4c93;
+      font-family: 'Fira Mono', Consolas, monospace;
+      border-radius: 20px;
+      padding: 1.2rem 1.6rem;
+      display: block;
+      overflow-x: auto;
+      box-shadow: inset 0 0 20px rgba(106, 76, 147, 0.3);
+      font-size: 1rem;
+      line-height: 1.4;
+      margin-bottom: 1.2rem;
+      white-space: pre-wrap;
+      transition: transform 0.3s ease;
+      user-select: text;
+    }
+    code:hover, pre:hover {
+      transform: scale(1.03);
+      box-shadow: inset 0 0 30px rgba(106, 76, 147, 0.6);
+    }
+
+    details {
+      background: #ef476f;
+      border-radius: 20px;
+      padding: 1.2rem 1.6rem;
+      box-shadow: 0 0 18px rgba(239, 71, 111, 0.3);
+      cursor: pointer;
+      margin-top: 1.2rem;
+      transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+      color: #fff9f9;
+      font-weight: 700;
+      user-select: none;
+    }
+    details[open] {
+      background: #ffd166;
+      color: #6a4c93;
+      box-shadow: 0 0 28px rgba(255, 209, 102, 0.7);
+      transform: scale(1.05);
+      border-radius: 20px 20px 0 0;
+    }
+    details summary {
+      font-weight: 900;
+      font-size: 1.25rem;
+      outline-offset: 3px;
+      list-style: none;
+      user-select: none;
+      cursor: pointer;
+    }
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    aside {
+      background-color: #06d6a0;
+      padding: 25px 30px;
+      border-radius: 25px;
+      margin-bottom: 50px;
+      box-shadow: 0 12px 35px rgba(6, 214, 160, 0.4);
+      color: #073b3a;
+      font-style: italic;
+      max-width: 900px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      user-select: text;
+      white-space: pre-wrap;
+      position: relative;
+      transition: box-shadow 0.3s ease;
+      cursor: default;
+    }
+    aside:hover, aside:focus-within {
+      box-shadow: 0 16px 45px rgba(6, 214, 160, 0.7);
+    }
+    aside h3 {
+      color: #004d40;
+      margin-bottom: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      font-style: normal;
+      text-shadow: 0 0 8px #004d40aa;
+    }
+
+    footer p {
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #edf2f4;
+      text-shadow: 1px 1px 3px #6a4c93aa;
+    }
+
+    /* Responsive */
+    @media (max-width: 950px) {
+      body {
+        margin: 10px;
+      }
+      section {
+        padding: 1.6rem 2rem;
+      }
+      aside {
+        padding: 20px 25px;
+        font-size: 1rem;
+      }
+      header, footer {
+        padding: 15px 20px;
+        font-size: 1rem;
+      }
+      nav a {
+        margin: 0 10px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Node.js Guide</h1>
+  <nav>
+    <a href="#intro">Introduction</a>
+    <a href="#modules">Modules</a>
+    <a href="#event-loop">Event Loop</a>
+    <a href="#core-modules">Core Modules</a>
+    <a href="#npm">npm & Packages</a>
+    <a href="#best-practices">Best Practices</a>
+  </nav>
+</header>
+
+<main>
+  <section id="intro" tabindex="0">
+    <h2>What is Node.js?</h2>
+    <p><u>Node.js</u> is a JavaScript runtime built on Chrome's V8 engine that allows you to run JavaScript on the server.</p>
+    <p>Key features:</p>
+    <ul>
+      <li>Event-driven, non-blocking I/O model</li>
+      <li>Built for scalable network applications</li>
+      <li>Single-threaded with asynchronous callbacks</li>
+      <li>Vast ecosystem via npm</li>
+    </ul>
+  </section>
+
+  <section id="modules" tabindex="0">
+    <h2>Modules</h2>
+    <p>Node.js uses CommonJS modules. Each file is a module with its own scope.</p>
+    <pre><code>// Exporting a function
+module.exports = function greet() {
+  console.log("Hello, Node.js!");
+};
+
+// Importing a module
+const greet = require('./greet');
+greet();</code></pre>
+    <p>In newer versions, ES Modules (import/export) syntax is also supported.</p>
+  </section>
+
+  <section id="event-loop" tabindex="0">
+    <h2>Event Loop & Asynchronous Programming</h2>
+    <p>Node.js uses an event loop to handle asynchronous operations without blocking the main thread.</p>
+    <pre><code>// Example: Non-blocking file read
+const fs = require('fs');
+
+fs.readFile('file.txt', 'utf8', (err, data) => {
+  if (err) throw err;
+  console.log(data);
+});
+
+console.log('Reading file asynchronously');</code></pre>
+    <p>The callback runs after the file is read, allowing other code to run meanwhile.</p>
+  </section>
+
+  <section id="core-modules" tabindex="0">
+    <h2>Core Modules</h2>
+    <ul>
+      <li><code>fs</code> - File system operations</li>
+      <li><code>http</code> - Create HTTP server/client</li>
+      <li><code>path</code> - Work with file and directory paths</li>
+      <li><code>events</code> - Event emitter API</li>
+      <li><code>os</code> - Operating system info</li>
+      <li><code>crypto</code> - Cryptography</li>
+    </ul>
+  </section>
+
+  <section id="npm" tabindex="0">
+    <h2>npm & Packages</h2>
+    <p>npm (Node Package Manager) is the default package manager for Node.js.</p>
+    <pre><code>// Install express (web framework)
+npm install express
+
+// Add to package.json
+{
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}</code></pre>
+    <p>You can use npm scripts for automation, and publish your own packages.</p>
+  </section>
+
+  <aside id="best-practices" tabindex="0" aria-label="Best Practices">
+    <h3>Best Practices</h3>
+    <pre>
+✅ Use asynchronous APIs to avoid blocking.
+✅ Handle errors properly in callbacks and promises.
+✅ Modularize your code with small reusable modules.
+✅ Use environment variables for configuration.
+✅ Keep dependencies up-to-date and audit for vulnerabilities.
+✅ Write tests for critical parts of your app.
+✅ Use linting tools like ESLint for consistent code style.
+✅ Use process managers (PM2) for production deployments.
+    </pre>
+  </aside>
+</main>
+
+<footer>
+  <p>&copy; 2025 TechSphere</p>
+</footer>
+
+</body>
+</html>

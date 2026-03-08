@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitHub Guide - Dark Theme</title>
+  <style>
+    /* Base reset and font */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+      background-color: #0d1117; /* GitHub dark bg */
+      color: #c9d1d9; /* light gray text */
+      min-height: 100vh;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    header, footer {
+      background-color: #161b22; /* darker header/footer */
+      padding: 15px 20px;
+      text-align: center;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px #39a0f0aa;
+      user-select: none;
+      color: #58a6ff;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: #58a6ff;
+      font-weight: 600;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: #58a6ff;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: #79c0ff;
+      outline: none;
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 100%;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    section {
+      background-color: #161b22;
+      padding: 20px 25px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      box-shadow: 0 5px 15px #39a0f044;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+    }
+    section:nth-child(odd) {
+      animation-delay: 0.15s;
+    }
+    section:nth-child(even) {
+      animation-delay: 0.3s;
+    }
+    section:hover, section:focus-within {
+      box-shadow: 0 10px 25px #58a6ff88;
+      transform: translateY(-5px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section h2 {
+      color: #58a6ff;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      border-bottom: 3px solid #2386f7;
+      padding-bottom: 0.4rem;
+      font-size: 2rem;
+      letter-spacing: 0.03em;
+    }
+
+    ul {
+      margin-left: 1.6rem;
+      margin-top: 0.8rem;
+    }
+    ul li {
+      margin-bottom: 0.6rem;
+    }
+
+    code, pre {
+      background: #0d1117;
+      color: #39a0f0;
+      font-family: 'Fira Mono', Consolas, monospace;
+      border-radius: 8px;
+      padding: 1rem 1.4rem;
+      display: block;
+      overflow-x: auto;
+      box-shadow: inset 0 0 10px #2386f7aa;
+      font-size: 0.95rem;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      white-space: pre-wrap;
+      transition: background-color 0.3s ease;
+    }
+
+    code {
+      padding: 2px 6px;
+      font-size: 0.9rem;
+      background-color: #0d1117cc;
+      border-radius: 5px;
+    }
+
+    details {
+      background-color: #0d1117;
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      box-shadow: 0 0 15px #2386f7aa;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      color: #79c0ff;
+      font-weight: 600;
+    }
+    details[open] {
+      background-color: #2386f7;
+      box-shadow: 0 0 30px #58a6ffcc;
+      color: #0d1117;
+    }
+    details summary {
+      user-select: none;
+      outline-offset: 2px;
+      list-style: none;
+      font-size: 1.15rem;
+    }
+
+    aside {
+      background-color: #161b22;
+      padding: 20px 25px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 20px #39a0f033;
+      color: #79c0ff;
+      font-style: italic;
+      max-width: 900px;
+      font-size: 1rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      user-select: text;
+      animation: fadeInUp 0.6s forwards;
+      animation-delay: 0.4s;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    aside h3 {
+      color: #2386f7;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      font-style: normal;
+    }
+
+    footer p {
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #58a6ff;
+      user-select: none;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 950px) {
+      body {
+        margin: 10px;
+      }
+      section {
+        padding: 15px 20px;
+      }
+      aside {
+        padding: 15px 20px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>GitHub Guide</h1>
+  <nav>
+    <a href="#intro">Introduction</a>
+    <a href="#repositories">Repositories</a>
+    <a href="#branching">Branching</a>
+    <a href="#pull-requests">Pull Requests</a>
+    <a href="#collaboration">Collaboration</a>
+    <a href="#best-practices">Best Practices</a>
+  </nav>
+</header>
+
+<main>
+  <section id="intro" tabindex="0">
+    <h2>What is GitHub?</h2>
+    <p><u>GitHub</u> is a web-based platform for version control and collaboration, built on top of <a href="https://git-scm.com/" target="_blank" rel="noopener" style="color:#79c0ff;">Git</a>.</p>
+    <p>It allows developers to:</p>
+    <ul>
+      <li>Host and manage Git repositories</li>
+      <li>Track changes to code</li>
+      <li>Collaborate on projects via branches and pull requests</li>
+      <li>Review code and manage issues</li>
+      <li>Automate workflows with GitHub Actions</li>
+    </ul>
+  </section>
+
+  <section id="repositories" tabindex="0">
+    <h2>Repositories (Repos)</h2>
+    <p>A repository is a project folder containing all files and revision history.</p>
+    <pre><code>git init             # Initialize a new repo
+git clone URL         # Clone an existing repo</code></pre>
+    <p>Repos can be public (open source) or private.</p>
+  </section>
+
+  <section id="branching" tabindex="0">
+    <h2>Branching</h2>
+    <p>Branches let you work on different features or fixes independently.</p>
+    <pre><code>git branch feature/login      # Create a new branch
+git checkout feature/login     # Switch to the branch
+git merge feature/login        # Merge changes back into main</code></pre>
+    <p>Common branch strategies: <em>main/master</em>, <em>develop</em>, <em>feature branches</em>.</p>
+  </section>
+
+  <section id="pull-requests" tabindex="0">
+    <h2>Pull Requests (PRs)</h2>
+    <p>PRs are proposed changes submitted for review before merging into a branch.</p>
+    <ul>
+      <li>Discuss and review code</li>
+      <li>Run automated tests</li>
+      <li>Merge approved changes</li>
+    </ul>
+  </section>
+
+  <section id="collaboration" tabindex="0">
+    <h2>Collaboration</h2>
+    <ul>
+      <li><strong>Forking:</strong> Copy a repo to your account to experiment without affecting the original.</li>
+      <li><strong>Issues:</strong> Track bugs, tasks, and feature requests.</li>
+      <li><strong>Code Review:</strong> Comment on PRs to improve code quality.</li>
+      <li><strong>GitHub Actions:</strong> Automate builds, tests, and deployments.</li>
+    </ul>
+  </section>
+
+  <aside tabindex="0" aria-label="Best Practices">
+    <h3>Best Practices</h3>
+    <pre>
+✅ Write clear commit messages.
+✅ Keep branches focused on one task.
+✅ Review PRs thoroughly before merging.
+✅ Use .gitignore to exclude unnecessary files.
+✅ Protect main branch with required reviews and tests.
+✅ Document repo with README and CONTRIBUTING files.
+✅ Use tags/releases for versioning.
+✅ Regularly sync forked repos to stay updated.
+    </pre>
+  </aside>
+</main>
+
+<footer>
+  <p>&copy; 2025 TechSphere</p>
+</footer>
+
+</body>
+</html>

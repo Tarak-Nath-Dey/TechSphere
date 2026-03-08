@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Python Guide</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Fira+Code&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Reset & Base */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0 1rem;
+      background: #f5f7fa;
+      color: #1a1a1a;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Container */
+    main {
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+      flex-grow: 1;
+    }
+
+    /* Header */
+    header {
+      background-color: #306998;
+      color: white;
+      padding: 1.5rem 1rem;
+      border-radius: 0 0 20px 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+      user-select: none;
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 2.4rem;
+      letter-spacing: 1.2px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Navigation */
+    nav {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: #ffe873; /* Python yellow accent */
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.4rem 1rem;
+      border-radius: 25px;
+      background-color: rgba(255 232 115 / 0.15);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-size: 1rem;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.08);
+      user-select: text;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      background-color: #ffe873;
+      color: #306998;
+      outline: none;
+      box-shadow: 0 4px 12px rgb(255 232 115 / 0.5);
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 3rem;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      color: #306998;
+      margin-bottom: 1rem;
+      border-bottom: 3px solid #ffe873;
+      padding-bottom: 0.25rem;
+      letter-spacing: 0.8px;
+    }
+
+    section h3 {
+      color: #1a1a1a;
+      margin-top: 1.6rem;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Text & Lists */
+    p,
+    ul {
+      font-weight: 300;
+      font-size: 1.1rem;
+      max-width: 100%;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 1.3rem;
+      list-style-type: disc;
+    }
+
+    ul ul {
+      list-style-type: circle;
+      padding-left: 1.5rem;
+      margin-top: 0.3rem;
+    }
+
+    ul li {
+      margin-bottom: 0.4rem;
+    }
+
+    /* Underlined text */
+    p u {
+      text-decoration-color: #306998;
+      font-weight: 600;
+      font-size: 1.15rem;
+      color: #1a1a1a;
+    }
+
+    /* Code and Pre */
+    code {
+      font-family: 'Fira Code', monospace;
+      background-color: #eaeff7;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      color: #c7254e;
+      user-select: text;
+    }
+
+    pre {
+      background-color: #eaeff7;
+      padding: 1rem 1.3rem;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.95rem;
+      box-shadow: inset 0 0 5px rgb(0 0 0 / 0.05);
+      line-height: 1.4;
+      margin-top: 0.8rem;
+      user-select: text;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    /* Details summary */
+    details {
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      background: #f0f4f8;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 3px 6px rgb(0 0 0 / 0.05);
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+    }
+
+    details[open] {
+      background: #d3e0ff;
+      box-shadow: 0 5px 15px rgb(48 105 152 / 0.2);
+    }
+
+    details summary {
+      font-weight: 600;
+      font-size: 1.15rem;
+      outline-offset: 6px;
+      user-select: none;
+    }
+
+    details summary::-webkit-details-marker {
+      font-size: 1.4rem;
+      color: #306998;
+    }
+
+    /* Aside (Best Practices) */
+    aside {
+      background-color: #d3e0ff;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgb(48 105 152 / 0.15);
+      font-weight: 500;
+      color: #1a1a1a;
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      white-space: pre-wrap;
+      font-size: 1.1rem;
+      user-select: text;
+    }
+
+    aside h3 {
+      margin-top: 0;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      color: #306998;
+      text-align: center;
+      font-size: 1.7rem;
+      letter-spacing: 1px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #999;
+      user-select: none;
+    }
+
+    /* Back Button */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      background-color: #306998;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.3rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 12px rgb(48 105 152 / 0.5);
+      margin-bottom: 2rem;
+      user-select: none;
+      text-decoration: none;
+    }
+
+    .back-button:hover,
+    .back-button:focus-visible {
+      background-color: #1e4b7a;
+      outline: none;
+      box-shadow: 0 6px 18px rgb(30 75 122 / 0.7);
+    }
+
+    .back-button svg {
+      margin-right: 0.5rem;
+      stroke: white;
+      stroke-width: 2;
+      width: 20px;
+      height: 20px;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    /* Responsive typography */
+    @media (max-width: 720px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      section h2 {
+        font-size: 1.6rem;
+      }
+
+      section h3 {
+        font-size: 1.2rem;
+      }
+
+      nav a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+      }
+
+      aside {
+        font-size: 1rem;
+        padding: 1rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      main {
+        padding: 1.2rem 1rem;
+        margin: 1rem auto 3rem;
+      }
+
+      nav {
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Python Guide</h1>
+    <nav>
+      <a href="#intro">Introduction</a>
+      <a href="#basics">Basics</a>
+      <a href="#syntax">Syntax</a>
+      <a href="#oop">OOP Concepts</a>
+      <a href="#best-practices">Best Practices</a>
+    </nav>
+  </header>
+
+  <main>
+    <button class="back-button" aria-label="Go Back" onclick="history.back()">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+      Back
+    </button>
+
+    <section id="intro">
+      <h2>What is Python?</h2>
+      <p><u>Python</u> is a high-level, interpreted programming language known for its readability and simplicity.</p>
+      <p>Popular for:</p>
+      <ul>
+        <li>Web development</li>
+        <li>Data science and machine learning</li>
+        <li>Scripting and automation</li>
+        <li>Scientific computing</li>
+      </ul>
+    </section>
+
+    <section id="basics">
+      <h2>Python Basics</h2>
+
+      <h3>Hello World</h3>
+      <pre><code>print("Hello, World!")</code></pre>
+
+      <h3>Data Types</h3>
+      <ul>
+        <li><strong>int</strong> — integers, e.g., <code>10</code></li>
+        <li><strong>float</strong> — decimal numbers, e.g., <code>3.14</code></li>
+        <li><strong>str</strong> — text strings, e.g., <code>"hello"</code></li>
+        <li><strong>bool</strong> — True or False</li>
+        <li><strong>list</strong> — ordered collections, e.g., <code>[1, 2, 3]</code></li>
+        <li><strong>dict</strong> — key-value pairs, e.g., <code>{"name": "Alice"}</code></li>
+      </ul>
+    </section>
+
+    <section id="syntax">
+      <h2>Python Syntax Essentials</h2>
+      <ul>
+        <li>Indentation defines code blocks (usually 4 spaces)</li>
+        <li>No semicolons needed to end statements</li>
+        <li>Comments:
+          <ul>
+            <li>Single-line: <code># This is a comment</code></li>
+            <li>Multi-line: use triple quotes <code>""" Comment """</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Control Flow</h3>
+      <pre><code># If-else
+x = 10
+if x &gt; 0:
+    print("Positive")
+else:
+    print("Non-positive")
+
+# For loop
+for i in range(5):
+    print(i)
+
+# While loop
+count = 0
+while count &lt; 5:
+    print(count)
+    count += 1
+</code></pre>
+
+      <h3>Functions</h3>
+      <pre><code>def add(a, b):
+    return a + b
+</code></pre>
+    </section>
+
+    <section id="oop">
+      <h2>Object-Oriented Programming (OOP) in Python</h2>
+
+      <details>
+        <summary>Classes & Objects</summary>
+        <pre><code>class Dog:
+    def __init__(self, name):
+        self.name = name
+
+    def bark(self):
+        print("Woof!")
+
+dog = Dog("Buddy")
+dog.bark()</code></pre>
+      </details>
+
+      <details>
+        <summary>Inheritance</summary>
+        <pre><code>class Animal:
+    def speak(self):
+        print("Animal sound")
+
+class Cat(Animal):
+    def speak(self):
+        print("Meow")
+
+cat = Cat()
+cat.speak()</code></pre>
+      </details>
+
+      <details>
+        <summary>Encapsulation</summary>
+        <pre><code>class Person:
+    def __init__(self, name):
+        self.__name = name  # private attribute
+
+    def get_name(self):
+        return self.__name
+
+p = Person("Alice")
+print(p.get_name())</code></pre>
+      </details>
+
+      <details>
+        <summary>Polymorphism</summary>
+        <pre><code>class Bird:
+    def fly(self):
+        print("Flying")
+
+class Eagle(Bird):
+    def fly(self):
+        print("Eagle soaring")
+
+def let_fly(bird):
+    bird.fly()
+
+let_fly(Bird())
+let_fly(Eagle())</code></pre>
+      </details>
+    </section>
+
+    <aside id="best-practices">
+      <h3>Best Practices</h3>
+      <pre>
+✅ Follow PEP 8 style guide.
+✅ Use meaningful variable and function names.
+✅ Keep code DRY (Don't Repeat Yourself).
+✅ Write docstrings for functions and classes.
+✅ Use virtual environments to manage dependencies.
+✅ Handle exceptions with try-except blocks.
+✅ Write tests with unittest or pytest.
+      </pre>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TechSphere</p>
+  </footer>
+
+</body>
+
+</html>

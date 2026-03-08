@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>TechSphere</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <header id="heading">
+            <h1>Welcome to TechSphere</h1>
+        </header>
+
+        <form action="content.html" method="GET" class="form">
+            <input type="email" name="userEmail" id="uemail" placeholder="Enter username or email" required />
+            <input type="password" name="userPass" id="upass" placeholder="Enter password" required />
+            <button type="submit" id="signIn">Sign In</button>
+        </form>
+
+        <div class="auth-links">
+            <button id="forgotPass" onclick="alert('Redirecting to password recovery...')">Forgotten your password?</button>
+            <span id="sUP">
+                Don't have an account?
+                <button id="signUp" onclick="alert('Redirecting to sign up page...')">Sign Up</button>
+            </span>
+        </div>
+
+        <div class="social-buttons">
+            <button id="b1" title="Sign in with Google">
+                <img src="google.webp" alt="Google icon" />
+                Sign in with Google
+            </button>
+            <button id="b2" title="Sign in with Facebook">
+                Sign in with Facebook
+            </button>
+            <button id="b3" title="Sign in with LinkedIn">
+                Sign in with LinkedIn
+            </button>
+        </div>
+    </div>
+</body>
+</html>
